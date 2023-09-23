@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Healthcare Charges Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            color: #333;
+        }
+
+        form {
+            width: 50%;
+            margin: 30px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+
+        select {
+            height: 40px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-top: 30px;
+        }
+
+        p {
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .alert {
+            background-color: #f2dede;
+            border: 1px solid #ebccd1;
+            border-radius: 3px;
+            color: #a94442;
+            padding: 10px;
+            margin-top: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Previsão de despesa com saúde</h1>
+    <form method="POST" action="/">
+        <label for="age">Idade:</label>
+        <input type="text" name="idade"><br>
+        <label for="sex">Sexo:</label>
+        <select name="sexo">
+            <option value="male">Masculino</option>
+            <option value="female">Feminino</option>
+        </select><br>
+        <label for="bmi">Índice de Massa Corporal (BMI):</label>
+        <input type="text" name="imc"><br>
+        <label for="children">Número de filhos:</label>
+        <input type="text" name="filhos"><br>
+        <label for="fumante">Fumante:</label>
+        <select name="fumante">
+            <option value="yes">Sim</option>
+            <option value="no">Não</option>
+        </select><br>
+        <label for="regiao">Região:</label>
+        <select name="regiao">
+            <option value="northeast">Nordeste</option>
+            <option value="northwest">Noroeste</option>
+            <option value="southeast">Sudeste</option>
+            <option value="southwest">Sudoeste</option>
+        </select><br>
+
+        <!-- Adicione este bloco para exibir mensagens de erro -->
+        {% if error_message %}
+        <div class="alert">
+           {{ error_message }}
+        </div>
+        {% endif %}
+
+        <input type="submit" value="Fazer Previsão">
+    </form>
+    {% if previsao is not none %}
+    <h2>Previsão de despesas de saúde:</h2>
+    <p>A previsão do custo médico é: ${{ '%.2f'|format(previsao) }}</p>
+    {% endif %}
+
+    <footer>
+        <p>&copy; André Eugenio Neto 2023</p>
+    </footer>
+</body>
+</html>
